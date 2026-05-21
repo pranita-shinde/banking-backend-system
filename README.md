@@ -1,15 +1,19 @@
 # 💳 Banking Backend System
 
-A backend application simulating core banking operations, built using Java and Spring Boot following a layered architecture.
+A backend application simulating core banking operations, built using Java and Spring Boot following a layered architecture with secure authentication and real-world banking features.
 
 ---
 
 ## 🚀 Features
 - Account Creation & Management  
-- Deposit & Withdrawal Operations  
+- Deposit, Withdrawal & Fund Transfer  
 - Secure Login with Username, Password & PIN  
-- Transaction Tracking with Timestamp  
-- Exception Handling (Global)  
+- JWT-based Authentication & Authorization  
+- Role-Based Access Control (USER / ADMIN)  
+- Account Lock after multiple failed login attempts  
+- Transaction Tracking (DEPOSIT, WITHDRAW, TRANSFER) with Remarks  
+- Pagination for Transaction History  
+- Global Exception Handling  
 - Logging using SLF4J  
 
 ---
@@ -19,12 +23,14 @@ Controller → Service → Repository → Database
 
 - Clean separation of concerns  
 - DTO-based API design (no entity exposure)  
+- Layered architecture for scalability and maintainability  
 
 ---
 
 ## 🛠️ Tech Stack
 - Java  
 - Spring Boot  
+- Spring Security (JWT)  
 - REST APIs  
 - MySQL  
 - Maven  
@@ -33,7 +39,17 @@ Controller → Service → Repository → Database
 ---
 
 ## 📂 Project Structure
-src/main/java/com/hunt/demo/ ├── controller ├── service ├── repository ├── dto ├── entity ├── exception ├── mapper
+src/main/java/com/hunt/demo/  
+├── controller  
+├── service  
+├── repository  
+├── dto  
+├── entity  
+├── exception  
+├── mapper  
+├── config  
+├── filter  
+
 ---
 
 ## 🔗 API Endpoints (Sample)
@@ -44,7 +60,11 @@ src/main/java/com/hunt/demo/ ├── controller ├── service ├── re
 | GET | /accounts/{id} | Get account details |
 | PUT | /accounts/{id}/deposit | Deposit money |
 | PUT | /accounts/{id}/withdraw | Withdraw money |
-| POST | /auth/login | User login |
+| POST | /accounts/transfer | Transfer money |
+| GET | /accounts/{id}/transactions | Get paginated transactions |
+| POST | /auth/login | User login (JWT token) |
+| GET | /admin/test | Admin-only access |
+| PUT | /admin/unlock/{id} | Unlock user account |
 
 ---
 
@@ -54,15 +74,20 @@ src/main/java/com/hunt/demo/ ├── controller ├── service ├── re
 2. Open in Spring Tool Suite / IntelliJ  
 3. Configure database in `application.properties`  
 4. Run the application  
-5. Test APIs using Postman  
+5. Use Postman to test APIs  
+6. Add JWT token in Authorization header:  
+   `Bearer <your_token>`  
 
 ---
 
 ## 📌 Highlights
-- Implemented DTO pattern for clean API design  
-- Added database constraints (unique username, non-null fields)  
-- Integrated logging for better debugging  
-- Structured code using industry-standard practices  
+- Implemented JWT-based authentication and role-based authorization  
+- Designed secure APIs using Spring Security filters  
+- Ensured transaction consistency using `@Transactional` (ACID principles)  
+- Implemented pagination for efficient data retrieval  
+- Added account lock mechanism for security enhancement  
+- Used DTO pattern for clean and secure API responses  
+- Integrated logging for debugging and monitoring  
 
 ---
 
