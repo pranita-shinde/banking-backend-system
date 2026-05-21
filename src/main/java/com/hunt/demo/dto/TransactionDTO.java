@@ -7,6 +7,7 @@ public class TransactionDTO {
 	private double amount;
 	
 	private String timestamp;
+	private String remarks;
 
 	public int getId() {
 		return id;
@@ -46,5 +47,13 @@ public class TransactionDTO {
 
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public String getRemarks() {
+   		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+    	this.remarks = remarks;
 	}
 }

@@ -1,5 +1,6 @@
 package com.hunt.demo.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -12,13 +13,14 @@ import com.hunt.demo.dto.AccountResponseDTO;
 import com.hunt.demo.dto.AmountDTO;
 import com.hunt.demo.dto.LoginRequestDTO;
 import com.hunt.demo.dto.TransactionDTO;
+import com.hunt.demo.dto.TransferRequestDTO;
+import com.hunt.demo.dto.TransferResponseDTO;
 import com.hunt.demo.dto.WithdrawRequest;
 import com.hunt.demo.entity.Transaction;
 import com.hunt.demo.response.ApiResponse;
 import com.hunt.demo.service.AccountService;
-import com.hunt.demo.service.UserService;
-
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 
 @RestController
 @RequestMapping("/accounts")
@@ -69,7 +71,25 @@ public class AccountController {
 	
 	//transactions
 	@GetMapping("/{id}/transactions")
+	public Page<TransactionDTO> getTransactions(
+        	@PathVariable int id,
+        	@RequestParam(defaultValue = "0") int page,
+        	@RequestParam(defaultValue = "5") int size) {
+
+    	return service.getTransactions(id, page, size);
+	}
+	/*@GetMapping("/{id}/transactions")
 	public List<TransactionDTO> getTransactions(@PathVariable int id){
 		return service.getTransactions(id);
+	}*/
+
+	//transfer
+	@PostMapping("/transfer")
+	public ApiResponse transfer(@RequestBody TransferRequestDTO dto) {
+
+    TransferResponseDTO response = service.transferMoney(dto);
+
+    return new ApiResponse("Money transferred successfully",200,response);
+
 	}
 }

@@ -3,34 +3,40 @@ package com.hunt.demo.response;
 import java.time.LocalDateTime;
 
 public class ApiResponse {
-	private String msg;
-	private int status;
-	private LocalDateTime timestamp;
-	
-	public ApiResponse(String msg, int status, LocalDateTime timestamp) {
-		this.msg = msg;
-		this.status = status;
-		this.timestamp = timestamp;
-	}
 
-	public ApiResponse(String msg, int status) {
-		this.msg = msg;
-		this.status = status;
-	}
+    private String msg;
+    private int status;
+    private LocalDateTime timestamp;
+    private Object data;
 
-	public String getMsg() {
-		return msg;
-	}
+    // ✅ Constructor with data
+    public ApiResponse(String msg, int status, Object data) {
+        this.msg = msg;
+        this.status = status;
+        this.data = data;
+        this.timestamp = LocalDateTime.now();
+    }
 
-	public int getStatus() {
-		return status;
-	}
+    // ✅ Constructor without data
+    public ApiResponse(String msg, int status) {
+        this.msg = msg;
+        this.status = status;
+        this.timestamp = LocalDateTime.now();
+    }
 
-	public LocalDateTime getTimestamp() {
-		return timestamp;
-	}
+    public String getMsg() {
+        return msg;
+    }
 
-	public void setTimestamp(LocalDateTime timestamp) {
-		this.timestamp = timestamp;
-	}	
+    public int getStatus() {
+        return status;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public Object getData() {
+        return data;
+    }
 }

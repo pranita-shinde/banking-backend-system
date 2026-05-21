@@ -16,6 +16,7 @@ public class TransactionMapper {
 		if(t.getTimestamp() != null) {
 			dto.setTimestamp(t.getTimestamp().toString());
 		}
+		dto.setRemarks(t.getRemarks());
 		
 		return dto;
 	}

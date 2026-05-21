@@ -16,6 +16,7 @@ public class Transaction {
 	private String type;  //deposit//withdraw
 	private double amount;
 	private LocalDateTime timestamp;
+	private String remarks;
 	
 	public int getId() {
 		return id;
@@ -46,5 +47,11 @@ public class Transaction {
 	}
 	public void setTimestamp(LocalDateTime timestamp) {
 		this.timestamp = timestamp;
+	}
+	public String getRemarks() {
+		 return remarks; 
+	}
+    public void setRemarks(String remarks) { 
+		this.remarks = remarks; 
 	}
 }	

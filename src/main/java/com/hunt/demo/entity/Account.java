@@ -1,7 +1,5 @@
 package com.hunt.demo.entity;
 
-
-
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
@@ -16,6 +14,15 @@ public class Account {
 	private String name;
 	private double balance;
 	private LocalDateTime createdAt;
+
+	private double interestRate = 2.5; // 2.5%
+
+	private int failedAttempts = 0;
+	private boolean locked = false;
+
+	private LocalDateTime lockTime;
+
+	private String role = "USER"; // default role
 	
 	@Column(unique = true, nullable = false)
 	private String username;
@@ -75,5 +82,35 @@ public class Account {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+	public int getFailedAttempts() {
+    	return failedAttempts;
+	}
+
+	public void setFailedAttempts(int failedAttempts) {
+    	this.failedAttempts = failedAttempts;
+	}
+
+	public boolean isLocked() {
+    	return locked;
+	}
+
+	public void setLocked(boolean locked) {
+    	this.locked = locked;
+	}
+
+	public LocalDateTime getLockTime() {
+    	return lockTime;
+	}
+
+	public void setLockTime(LocalDateTime lockTime) {
+    	this.lockTime = lockTime;
+	}
+
+	public String getRole() {
+    	return role;
+	}
+
+	public void setRole(String role) {
+    	this.role = role;
+	}
 }

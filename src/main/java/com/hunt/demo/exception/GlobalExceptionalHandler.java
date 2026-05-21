@@ -36,8 +36,17 @@ public class GlobalExceptionalHandler {
 		);
 	}
 	
+	@ExceptionHandler(RuntimeException.class)
+	public ResponseEntity<?> handleRuntime(RuntimeException ex){
+    	return new ResponseEntity<>(
+        	new ApiResponse(ex.getMessage(), 400),
+        	HttpStatus.BAD_REQUEST
+    	);
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<?> handleGeneral(Exception ex){
+		ex.printStackTrace(); // Print the full stack trace for debugging
 		return new ResponseEntity<>(
 			new ApiResponse("Something went wrong", 500),
 			HttpStatus.INTERNAL_SERVER_ERROR	
